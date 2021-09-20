@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+
 module.exports = {
   // Where Webpack looks to load your JavaScript
   entry: {
@@ -21,16 +22,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js$|jsx/,
         exclude: /node_modules/,
         use: ["babel-loader"],
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
 
   // Where find modules that can be imported (eg. React)
   resolve: {
-    extensions: ["*", ".js", ".jsx"],
+    extensions: ["*", ".js", ".jsx", ".css"],
     modules: [
       path.resolve(__dirname, "src"),
       path.resolve(__dirname, "src/components"),

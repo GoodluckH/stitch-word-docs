@@ -9,7 +9,7 @@ const baseStyle = {
   display: "flex",
   width: "70%",
   height: "100%",
-  minHeight: "600px",
+  minHeight: "500px",
   minWidth: "300px",
   maxWidth: "1200px",
   maxHeight: "1000px",
@@ -18,8 +18,8 @@ const baseStyle = {
   flexDirection: "column",
   alignItems: "center",
   padding: "20px",
-  borderWidth: 2,
-  borderRadius: 2,
+  borderWidth: 10,
+  borderRadius: 5,
   borderColor: "#eeeeee",
   borderStyle: "dashed",
   backgroundColor: "#fafafa",
@@ -35,7 +35,6 @@ const activeStyle = {
 const DropZone = () => {
   const onDrop = useCallback((acceptedFiles) => {
     // Do something
-    console.log(acceptedFiles);
     const csrftoken = Cookies.get("csrftoken");
     var form_data = new FormData();
     for (var i = 0; i < acceptedFiles.length; i++) {
@@ -49,7 +48,9 @@ const DropZone = () => {
           "X-CSRFToken": csrftoken,
         },
       })
-      .then((res) => {})
+      .then((res) => {
+        window.open("http://127.0.0.1:8000/download/");
+      })
       .catch((e) => console.log(e));
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -68,7 +69,9 @@ const DropZone = () => {
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p>
+            Drag 'n' drop Around the World files here, or click to select files
+          </p>
         )}
       </div>
     </div>

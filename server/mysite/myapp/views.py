@@ -1,6 +1,11 @@
+import os
+from datetime import datetime
+
 from django.shortcuts import render
+from django.conf import settings
 from django.http.response import HttpResponse
 from rest_framework.views import APIView
+from django.utils.encoding import smart_str
 
 from .forms import DocumentForm
 from .models import Document
@@ -29,10 +34,22 @@ class Upload(APIView):
             for f in request.FILES.getlist('atw'):
                 newfile = Document(docfile=f)
                 newfile.save()
-            processor = FilesProcessor()
+            
+            output_filename = "OUT-ATW.docx"
+            processor = FilesProcessor(output_filename)
             processor.process()
             STATE['status'] = 'done'
             return HttpResponse("Successfully processed files!")
         else:
             form = DocumentForm()
         return render(request, 'myapp/index.html')
+
+def download(request):
+    output_filename = "OUT-ATW.docx"
+    file_path = os.path.join(settings.MEDIA_ROOT, output_filename)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+            response['Content-Disposition'] = 'attachment; filename=' + output_filename
+            response['X-Sendfile'] = smart_str(file_path)
+            return response

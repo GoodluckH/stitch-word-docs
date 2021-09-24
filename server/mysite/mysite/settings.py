@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-m6u29oxr^f$y0p$!01tu#f#ma7w(bf&p)#lwr$(hc_)75f!jyp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -128,6 +129,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'myapp/static/'),
 )
 STATIC_URL = 'myapp/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Configure path to uploaded files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'myapp/docs')
@@ -137,3 +139,6 @@ MEDIA_URL = 'upload/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())

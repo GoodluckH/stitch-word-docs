@@ -42,14 +42,14 @@ const DropZone = () => {
     }
 
     axios
-      .post("http://127.0.0.1:8000/upload/", form_data, {
+      .post("https://atw.herokuapp.com/upload/", form_data, {
         header: {
           "content-type": "undefined",
           "X-CSRFToken": csrftoken,
         },
       })
       .then((res) => {
-        window.open("http://127.0.0.1:8000/download/");
+        window.open("https://atw.herokuapp.com/download/");
       })
       .catch((e) => console.log(e));
   }, []);

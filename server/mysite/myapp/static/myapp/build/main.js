@@ -2172,13 +2172,13 @@ const DropZone = () => {
       form_data.append("atw", acceptedFiles[i]);
     }
 
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post("http://127.0.0.1:8000/upload/", form_data, {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post("https://atw.herokuapp.com/upload/", form_data, {
       header: {
         "content-type": "undefined",
         "X-CSRFToken": csrftoken
       }
     }).then(res => {
-      window.open("http://127.0.0.1:8000/download/");
+      window.open("https://atw.herokuapp.com/download/");
     }).catch(e => console.log(e));
   }, []);
   const {

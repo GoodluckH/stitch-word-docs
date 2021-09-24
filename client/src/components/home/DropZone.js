@@ -44,7 +44,7 @@ const DropZone = () => {
     axios
       .post("https://atw.herokuapp.com/upload/", form_data, {
         header: {
-          "content-type": "undefined",
+          "content-type": "application/x-www-form-urlencoded",
           "X-CSRFToken": csrftoken,
         },
       })

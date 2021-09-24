@@ -2174,7 +2174,7 @@ const DropZone = () => {
 
     axios__WEBPACK_IMPORTED_MODULE_2___default().post("https://atw.herokuapp.com/upload/", form_data, {
       header: {
-        "content-type": "undefined",
+        "content-type": "application/x-www-form-urlencoded",
         "X-CSRFToken": csrftoken
       }
     }).then(res => {
